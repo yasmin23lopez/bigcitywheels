@@ -27,8 +27,8 @@ export default function QuoteForm({ variant = "section", onClose }: QuoteFormPro
   const isPopup = variant === "popup";
 
   const inputClass = isPopup
-    ? "w-full px-4 py-3.5 font-body text-base text-white placeholder:text-white/50 bg-white/10 border border-white/20 focus:border-white/40 focus:outline-none rounded-lg transition-colors"
-    : "w-full px-4 py-3.5 font-body text-base text-white placeholder:text-white/40 bg-[#0a0a0a] border border-white/[0.08] focus:border-red/50 focus:outline-none transition-colors";
+    ? "w-full px-4 py-3.5 font-body text-base leading-normal text-white placeholder:text-white/50 placeholder:font-body placeholder:text-base bg-white/10 border border-white/20 focus:border-white/40 focus:outline-none rounded-lg transition-colors"
+    : "w-full px-4 py-3.5 font-body text-base leading-normal text-white placeholder:text-white/40 placeholder:font-body placeholder:text-base bg-[#0a0a0a] border border-white/[0.08] focus:border-red/50 focus:outline-none transition-colors";
 
   return (
     <div className={`relative ${isPopup ? "" : "bg-card-bg border border-card-border"} p-6 sm:p-8`}>

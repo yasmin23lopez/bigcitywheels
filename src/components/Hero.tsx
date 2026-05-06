@@ -164,7 +164,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative h-[250vh] bg-black"
+      className="relative h-[250vh] bg-[#3B3B3B]"
     >
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
         {/* 3D Wheel - Behind everything */}
@@ -178,17 +178,27 @@ export default function Hero() {
 
         {/* Main Content - On top */}
         <div className="relative z-10 text-center px-4">
-          {/* Badge */}
+          {/* Promo Banner - Above headline */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="mb-6"
           >
-            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-condensed text-xs sm:text-sm tracking-[0.3em] uppercase font-semibold px-4 py-2 border border-white/20">
-              <span className={`w-2 h-2 rounded-full ${isOpen ? "bg-green-500 animate-pulse" : "bg-red animate-pulse"}`} />
-              {badgeText}
-            </span>
+            <div
+              className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-red via-red-dark to-red px-4 sm:px-8 py-2.5 sm:py-3 border border-white/10 shadow-[0_0_30px_rgba(229,0,16,0.3)]"
+              style={{
+                clipPath: "polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%)",
+              }}
+            >
+              <span className="text-lg sm:text-xl leading-none">🔥</span>
+              <span className="font-condensed text-[11px] sm:text-sm font-bold tracking-[0.08em] sm:tracking-[0.12em] uppercase text-white">
+                Buy 3 Tires, Get the 4th 50% Off
+              </span>
+              <span className="hidden sm:inline font-condensed text-xs tracking-[0.1em] uppercase text-white/60">
+                — Limited Time
+              </span>
+            </div>
           </motion.div>
 
           {/* Headline - "Big wheels start in a big city." */}
@@ -211,16 +221,6 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Tagline */}
-          <motion.p
-            style={{ opacity: ctaOpacity }}
-            animate={{ opacity: ctaVisible ? 1 : undefined }}
-            transition={{ duration: 0.8 }}
-            className={`mt-6 text-white/50 font-condensed text-sm sm:text-base tracking-[0.2em] uppercase ${ctaVisible ? "!opacity-100" : ""}`}
-          >
-            Tires · Rims · Suspension
-          </motion.p>
-
           {/* CTA */}
           <motion.div
             style={{ opacity: ctaOpacity }}
@@ -230,17 +230,30 @@ export default function Hero() {
             className={`mt-8 ${ctaVisible ? "!opacity-100" : ""}`}
           >
             <a
-              href="#contact"
+              href="/wheels"
               className="group inline-flex items-center gap-3 bg-red text-white font-display font-bold text-sm sm:text-base tracking-[0.1em] uppercase px-8 py-4 hover:bg-red-dark transition-all duration-300"
               style={{
                 clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)",
               }}
             >
-              <span>Get a Quote</span>
+              <span>Shop Now</span>
               <TireIcon className="w-5 h-5 transition-transform duration-1000 group-hover:rotate-[360deg]" />
             </a>
           </motion.div>
         </div>
+
+        {/* Badge - Bottom left */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="absolute bottom-8 left-6 sm:left-10 z-20"
+        >
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-condensed text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold px-4 py-2 border border-white/20">
+            <span className={`w-2 h-2 rounded-full ${isOpen ? "bg-green-500 animate-pulse" : "bg-red animate-pulse"}`} />
+            {badgeText}
+          </span>
+        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div

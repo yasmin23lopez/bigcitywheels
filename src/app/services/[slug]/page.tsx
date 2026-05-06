@@ -78,7 +78,7 @@ const servicesData: Record<string, {
 };
 
 export function generateStaticParams() {
-  return Object.keys(servicesData).map((slug) => ({ slug }));
+  return Object.keys(servicesData).filter(slug => slug !== "lift-kits").map((slug) => ({ slug }));
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {

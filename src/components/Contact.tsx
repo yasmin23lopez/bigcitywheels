@@ -52,7 +52,7 @@ export default function Contact() {
             Let&apos;s Talk{" "}
             <span className="italic text-red" style={{ fontFamily: "var(--font-accent)" }}>Wheels</span>
           </h2>
-          <p className="mt-4 font-body text-base sm:text-lg text-white/30 max-w-lg mx-auto">
+          <p className="mt-4 font-body text-base sm:text-lg text-white/50 max-w-lg mx-auto">
             Walk-ins welcome. Se habla español.
           </p>
           <div className="mt-4 w-16 h-[2px] bg-red mx-auto" />

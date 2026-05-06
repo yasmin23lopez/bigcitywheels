@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import TireIcon from "@/components/TireIcon";
+import { useQuoteCart } from "@/components/QuoteCartContext";
 
 interface MegaMenuSection {
   title: string;
@@ -22,12 +23,44 @@ const navItems: NavItem[] = [
     href: "/tires",
     megamenu: [
       {
-        title: "By Category",
+        title: "All Brands",
+        links: [
+          { label: "Nitto", href: "/tires?brand=NITTO" },
+          { label: "Toyo", href: "/tires?brand=TOYO" },
+          { label: "Pirelli", href: "/tires?brand=PIRELLI" },
+          { label: "Goodyear", href: "/tires?brand=GOODYEAR" },
+          { label: "Hankook", href: "/tires?brand=HANKOOK" },
+          { label: "Radar", href: "/tires?brand=RADAR" },
+          { label: "Landspider", href: "/tires?brand=LANDSPIDER" },
+          { label: "Predator", href: "/tires?brand=PREDATOR" },
+          { label: "Zeta", href: "/tires?brand=ZETA" },
+          { label: "Accelera", href: "/tires?brand=ACCELERA" },
+          { label: "Dunlop", href: "/tires?brand=DUNLOP" },
+          { label: "Evergreen", href: "/tires?brand=EVERGREEN" },
+          { label: "Farroad", href: "/tires?brand=FARROAD" },
+          { label: "Fullway", href: "/tires?brand=FULLWAY" },
+          { label: "Gritmaster", href: "/tires?brand=GRITMASTER" },
+          { label: "Haida", href: "/tires?brand=HAIDA" },
+          { label: "Kanati", href: "/tires?brand=KANATI" },
+          { label: "Landgolden", href: "/tires?brand=LANDGOLDEN" },
+          { label: "Lexani", href: "/tires?brand=LEXANI" },
+          { label: "Lionhart", href: "/tires?brand=LIONHART" },
+          { label: "Mastertrack", href: "/tires?brand=MASTERTRACK" },
+          { label: "Nebula", href: "/tires?brand=NEBULA" },
+          { label: "Roadone", href: "/tires?brand=ROADONE" },
+          { label: "Royalblack", href: "/tires?brand=ROYALBLACK" },
+          { label: "Travelstar", href: "/tires?brand=TRAVELSTAR" },
+          { label: "Suretrac", href: "/tires?brand=SURETRAC" },
+          { label: "Trailer", href: "/tires?brand=TRAILER" },
+          { label: "Vogue", href: "/tires?brand=VOGUE" },
+        ],
+      },
+      {
+        title: "By Type",
         links: [
           { label: "All-Terrain", href: "/tires" },
-          { label: "Highway", href: "/tires" },
           { label: "Mud-Terrain", href: "/tires" },
-          { label: "All-Season", href: "/tires" },
+          { label: "Highway", href: "/tires" },
           { label: "Performance", href: "/tires" },
         ],
       },
@@ -37,17 +70,7 @@ const navItems: NavItem[] = [
           { label: "Pickup Trucks", href: "/tires" },
           { label: "SUV / CUV", href: "/tires" },
           { label: "Sedan / Coupe", href: "/tires" },
-          { label: "3/4 Ton & 3500", href: "/tires" },
-        ],
-      },
-      {
-        title: "Popular Brands",
-        links: [
-          { label: "BFGoodrich", href: "/tires" },
-          { label: "Nitto", href: "/tires" },
-          { label: "Toyo", href: "/tires" },
-          { label: "Falken", href: "/tires" },
-          { label: "Cooper", href: "/tires" },
+          { label: "3/4 Ton & Dually", href: "/tires" },
         ],
       },
     ],
@@ -57,29 +80,88 @@ const navItems: NavItem[] = [
     href: "/wheels",
     megamenu: [
       {
-        title: "By Style",
+        title: "All Brands",
         links: [
-          { label: "Off-Road", href: "/wheels" },
-          { label: "Street / Sport", href: "/wheels" },
-          { label: "Classic / Chrome", href: "/wheels" },
-          { label: "Matte & Black", href: "/wheels" },
+          { label: "American Force", href: "/wheels?brand=AMERICAN+FORCE" },
+          { label: "Lexani", href: "/wheels?brand=LEXANI" },
+          { label: "Forgiato", href: "/wheels?brand=FORGIATO" },
+          { label: "Giovanna", href: "/wheels?brand=GIOVANNA" },
+          { label: "Mach Performance", href: "/wheels?brand=MACH" },
+          { label: "Hardcore Offroad", href: "/wheels?brand=HARDCORE" },
+          { label: "Revenge Offroad", href: "/wheels?brand=REVENGE" },
+          { label: "Wicked Offroad", href: "/wheels?brand=WICKED" },
+          { label: "Wraith", href: "/wheels?brand=WRAITH" },
+          { label: "Artis", href: "/wheels?brand=ARFIS" },
+          { label: "AXE", href: "/wheels?brand=AXE" },
+          { label: "AXD Offroad", href: "/wheels?brand=AXD" },
+          { label: "Aodhan", href: "/wheels?brand=AODHAN" },
+          { label: "Built Offroad", href: "/wheels?brand=BUILT+OFFROAD" },
+          { label: "Curva Concept", href: "/wheels?brand=CURVA" },
+          { label: "Dolce", href: "/wheels?brand=DOLCE" },
+          { label: "DRW", href: "/wheels?brand=DRW" },
+          { label: "Defy", href: "/wheels?brand=DEFY" },
+          { label: "Gianelle", href: "/wheels?brand=GIANELLE" },
+          { label: "Koko Kulture", href: "/wheels?brand=KOKO" },
+          { label: "Katana Racing", href: "/wheels?brand=KATANA" },
+          { label: "Legion Offroad", href: "/wheels?brand=LEGION" },
+          { label: "Lethal Offroad", href: "/wheels?brand=LETHAL" },
+          { label: "Replica", href: "/wheels?brand=REPLICA" },
+          { label: "Scorpion", href: "/wheels?brand=SCORPION" },
+          { label: "STR", href: "/wheels?brand=STR" },
+          { label: "Revolution Racing", href: "/wheels?brand=REVOLUTION" },
+          { label: "TW Offroad", href: "/wheels?brand=TW+OFFROAD" },
+          { label: "US Mag", href: "/wheels?brand=US+MAG" },
+          { label: "VCT", href: "/wheels?brand=VCT" },
+          { label: "2Crave", href: "/wheels?brand=2CRAVE" },
         ],
       },
       {
         title: "By Size",
         links: [
-          { label: '17" – 18"', href: "/wheels" },
-          { label: '20" – 22"', href: "/wheels" },
-          { label: '24" +', href: "/wheels" },
+          { label: '20"', href: "/wheels" },
+          { label: '22"', href: "/wheels" },
+          { label: '24"', href: "/wheels" },
+          { label: '26"+', href: "/wheels" },
         ],
       },
       {
-        title: "Popular Brands",
+        title: "By Style",
         links: [
-          { label: "Fuel", href: "/wheels" },
-          { label: "Moto Metal", href: "/wheels" },
-          { label: "XD Series", href: "/wheels" },
-          { label: "American Force", href: "/wheels" },
+          { label: "Off-Road", href: "/wheels" },
+          { label: "Street / Luxury", href: "/wheels" },
+          { label: "Dually", href: "/wheels" },
+          { label: "Chrome / Polish", href: "/wheels" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Lift Kits",
+    href: "/services/lift-kits",
+    megamenu: [
+      {
+        title: "By Make",
+        links: [
+          { label: "Chevy / GMC", href: "/services/lift-kits" },
+          { label: "Ford", href: "/services/lift-kits" },
+          { label: "Dodge", href: "/services/lift-kits" },
+          { label: "Jeep", href: "/services/lift-kits" },
+          { label: "Nissan", href: "/services/lift-kits" },
+        ],
+      },
+      {
+        title: "By Type",
+        links: [
+          { label: "Lift Kits", href: "/services/lift-kits" },
+          { label: "Leveling Kits", href: "/services/lift-kits" },
+          { label: "Suspension Upgrades", href: "/services/lift-kits" },
+        ],
+      },
+      {
+        title: "Includes",
+        links: [
+          { label: "Free Alignment", href: "/services/lift-kits" },
+          { label: "Same-Day Install", href: "/services/lift-kits" },
         ],
       },
     ],
@@ -97,18 +179,9 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        title: "Suspension",
+        title: "More",
         links: [
-          { label: "Lift Kits", href: "/services/lift-kits" },
-          { label: "Leveling Kits", href: "/services/lift-kits" },
-          { label: "Full Suspension Upgrades", href: "/services/lift-kits" },
-        ],
-      },
-      {
-        title: "Why Big City",
-        links: [
-          { label: "Free Alignment w/ Purchase", href: "/services" },
-          { label: "Same-Day Service", href: "/services" },
+          { label: "Accessories", href: "/accessories" },
           { label: "Request a Quote", href: "/contact" },
         ],
       },
@@ -122,6 +195,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { totalItems, setIsOpen: setCartOpen } = useQuoteCart();
 
   useEffect(() => {
     const onScroll = () => {
@@ -165,9 +239,9 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 lg:px-8 pt-4 sm:pt-5"
+      className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 lg:px-4 pt-4 sm:pt-5"
     >
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative mx-auto">
         {/* Announcement marquee bar — blue with top diagonal cuts */}
         <div
           className="overflow-hidden"
@@ -176,12 +250,10 @@ export default function Navbar() {
             clipPath: "polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% 100%, 0% 100%, 0% 8px)",
           }}
         >
-          <div className="flex animate-marquee whitespace-nowrap py-1.5">
+          <div className="flex animate-marquee whitespace-nowrap py-1.5 sm:py-2">
             {[...Array(4)].map((_, i) => (
-              <span key={i} className="font-condensed text-[11px] tracking-[0.2em] uppercase font-semibold text-white/80 mx-8">
+              <span key={i} className="font-condensed text-[11px] sm:text-[13px] tracking-[0.05em] sm:tracking-[0.1em] uppercase font-semibold text-white/80 mx-6 sm:mx-8">
                 Grand Opening — Free Alignment with every rim or suspension purchase
-                <span className="mx-3 text-white/30">·</span>
-                <a href="tel:7135615519">Call (713) 561-5519</a>
               </span>
             ))}
           </div>
@@ -192,9 +264,9 @@ export default function Navbar() {
           <Image
             src="/logo.png"
             alt="Big City Wheels & Tires"
-            width={140}
-            height={140}
-            className="w-24 h-24 sm:w-28 sm:h-28 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_4px_16px_rgba(0,0,0,0.15)]"
+            width={160}
+            height={160}
+            className="w-32 h-32 sm:w-36 sm:h-36 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_4px_16px_rgba(0,0,0,0.15)]"
           />
         </a>
 
@@ -208,7 +280,7 @@ export default function Navbar() {
             }}
           >
             {/* Spacer for logo overlap */}
-            <div className="w-24 sm:w-28 flex-shrink-0" />
+            <div className="w-32 sm:w-36 flex-shrink-0" />
 
             {/* Desktop nav links */}
             <div className="hidden lg:flex items-center justify-center flex-1 gap-1">
@@ -221,7 +293,7 @@ export default function Navbar() {
                 >
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 font-condensed text-sm font-semibold tracking-[0.15em] uppercase px-5 py-2 transition-colors duration-200 ${
+                    className={`flex items-center gap-1 font-condensed text-base font-semibold tracking-[0.1em] uppercase px-5 py-2 transition-colors duration-200 ${
                       activeMenu === item.label ? "text-red" : `${textColor} ${hoverColor}`
                     }`}
                   >
@@ -245,14 +317,19 @@ export default function Navbar() {
             {/* Divider line */}
             <div className={`hidden sm:block w-px h-6 transition-colors duration-500 ${dividerColor}`} />
 
-            {/* CTA button — red */}
-            <a
-              href="#contact"
-              className="hidden sm:flex items-center justify-center gap-2 h-full font-condensed font-semibold text-sm tracking-[0.15em] uppercase px-8 sm:px-10 text-white bg-red hover:bg-red-dark transition-all duration-300 whitespace-nowrap group"
+            {/* Cart button */}
+            <button
+              onClick={() => setCartOpen(true)}
+              className="hidden sm:flex items-center justify-center gap-2 h-full font-condensed font-semibold text-base tracking-[0.1em] uppercase px-8 sm:px-10 text-white bg-red hover:bg-red-dark transition-all duration-300 whitespace-nowrap group relative"
             >
               Get a Quote
               <TireIcon className="w-4 h-4 transition-transform duration-1000 group-hover:rotate-[360deg]" />
-            </a>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-white text-red text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
 
             {/* Mobile toggle */}
             <div className="flex items-center ml-auto lg:hidden pr-4">
@@ -301,30 +378,86 @@ export default function Navbar() {
                   <div className="pl-36 pr-12 pt-8 pb-10">
                     {navItems
                       .filter((item) => item.label === activeMenu && item.megamenu)
-                      .map((item) => (
-                        <div key={item.label} className="grid grid-cols-3 gap-12">
-                          {item.megamenu!.map((section) => (
-                            <div key={section.title}>
-                              <h4 className="font-condensed text-xs font-bold tracking-[0.3em] uppercase text-red mb-5">
-                                {section.title}
-                              </h4>
-                              <ul className="space-y-3">
-                                {section.links.map((link) => (
-                                  <li key={link.label}>
+                      .map((item) => {
+                        const brandSection = item.megamenu!.find(s => s.links.length > 8);
+                        const otherSections = item.megamenu!.filter(s => s.links.length <= 8);
+                        
+                        return (
+                          <div key={item.label} className="flex gap-10">
+                            {/* Left: Brands grid */}
+                            {brandSection && (
+                              <div className="flex-1">
+                                <h4 className="font-condensed text-sm font-bold tracking-[0.2em] uppercase text-red mb-4">
+                                  {brandSection.title}
+                                </h4>
+                                <div className="grid grid-cols-4 gap-x-6 gap-y-2.5">
+                                  {brandSection.links.map((link) => (
                                     <a
+                                      key={link.label}
                                       href={link.href}
                                       onClick={() => setActiveMenu(null)}
-                                      className={`font-body text-[15px] font-medium hover:pl-2 transition-all duration-200 ${scrolled ? "text-black/50 hover:text-black" : "text-white/60 hover:text-white"}`}
+                                      className={`font-body text-base font-medium hover:text-red transition-colors duration-200 ${scrolled ? "text-black/60" : "text-white/60"}`}
                                     >
                                       {link.label}
                                     </a>
-                                  </li>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Right: Categories — or full width if no brands */}
+                            {otherSections.length > 0 && (
+                              <div className={brandSection 
+                                ? "w-[220px] flex-shrink-0 pl-10 border-l border-white/[0.06] flex flex-col gap-6" 
+                                : "flex-1 grid grid-cols-3 gap-10"
+                              }>
+                                {otherSections.map((section) => (
+                                  <div key={section.title}>
+                                    <h4 className="font-condensed text-sm font-bold tracking-[0.2em] uppercase text-red mb-3">
+                                      {section.title}
+                                    </h4>
+                                    <ul className="space-y-2">
+                                      {section.links.map((link) => (
+                                        <li key={link.label}>
+                                          <a
+                                            href={link.href}
+                                            onClick={() => setActiveMenu(null)}
+                                            className={`font-body text-base font-medium hover:text-red transition-colors duration-200 ${scrolled ? "text-black/50" : "text-white/50"}`}
+                                          >
+                                            {link.label}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
                                 ))}
-                              </ul>
-                            </div>
-                          ))}
-                        </div>
-                      ))}
+                              </div>
+                            )}
+
+                            {/* If no brand section, show all sections in a row */}
+                            {!brandSection && otherSections.length === 0 && item.megamenu!.map((section) => (
+                              <div key={section.title}>
+                                <h4 className="font-condensed text-sm font-bold tracking-[0.2em] uppercase text-red mb-3">
+                                  {section.title}
+                                </h4>
+                                <ul className="space-y-2">
+                                  {section.links.map((link) => (
+                                    <li key={link.label}>
+                                      <a
+                                        href={link.href}
+                                        onClick={() => setActiveMenu(null)}
+                                        className={`font-body text-base font-medium hover:text-red transition-colors duration-200 ${scrolled ? "text-black/50" : "text-white/50"}`}
+                                      >
+                                        {link.label}
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
               </motion.div>
@@ -354,7 +487,7 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block font-display text-2xl font-bold tracking-wider uppercase text-white/80 hover:text-red transition-colors py-4"
+                  className="block font-display text-2xl font-bold tracking-wider uppercase text-white/80 hover:text-red transition-colors py-4 min-h-[44px]"
                 >
                   {item.label}
                 </a>

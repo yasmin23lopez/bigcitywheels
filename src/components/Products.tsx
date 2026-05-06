@@ -8,28 +8,32 @@ import Badge from "@/components/Badge";
 
 const products = [
   {
-    title: "New Tires",
-    subtitle: "All Sizes & Brands",
-    description: "From all-terrain to highway, we carry tires for every vehicle and driving style.",
-    tag: "Most Popular",
+    title: "Tires",
+    subtitle: "1,000+ In Stock",
+    description: "28 brands including Nitto, Toyo, Pirelli, Goodyear, and more. All-terrain, mud, highway & performance.",
+    tag: "Shop Now",
+    href: "/tires",
   },
   {
-    title: "Custom Rims",
-    subtitle: "Style Meets Performance",
-    description: "Upgrade your look with custom wheels. Wide selection of styles, sizes, and finishes.",
-    tag: "Trending",
+    title: "Wheels",
+    subtitle: "2,400+ In Stock",
+    description: "American Force, Lexani, Forgiato, and 30+ brands. Off-road, street, dually & luxury.",
+    tag: "Shop Now",
+    href: "/wheels",
   },
   {
-    title: "Suspension Kits",
-    subtitle: "Lift & Level",
-    description: "Complete suspension and lift kit packages for trucks and SUVs. Go big or go home.",
-    tag: "Specialty",
+    title: "Lift & Level Kits",
+    subtitle: "Chevy · Ford · Dodge · Jeep",
+    description: "Professional suspension work. Free alignment included with every installation.",
+    tag: "Browse",
+    href: "/services/lift-kits",
   },
   {
     title: "Accessories",
-    subtitle: "Finish the Build",
-    description: "Lug nuts, spacers, TPMS sensors, and everything else to complete your setup.",
-    tag: "Add-On",
+    subtitle: "Wheel Weights & More",
+    description: "Everything to complete your setup. Wheel weights, lug nuts, spacers, and TPMS sensors.",
+    tag: "Browse",
+    href: "/accessories",
   },
 ];
 
@@ -61,21 +65,21 @@ export default function Products() {
               key={product.title}
               direction={i % 2 === 0 ? "left" : "right"}
             >
-              <div className="group relative bg-card-bg border border-card-border overflow-hidden transition-all duration-500 hover:border-blue-light/30 h-full">
-                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-blue/0 via-blue-light/50 to-blue/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <a href={product.href} className="group relative bg-card-bg border border-card-border overflow-hidden transition-all duration-500 hover:border-red/30 h-full block">
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-red/0 via-red/50 to-red/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="p-8 sm:p-10">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <Badge color="blue" className="mb-4 text-xs">{product.tag}</Badge>
-                      <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wider">
+                      <Badge className="mb-4 text-xs">{product.tag}</Badge>
+                      <h3 className="font-display text-3xl sm:text-4xl font-bold uppercase tracking-wider">
                         {product.title}
                       </h3>
                       <p className="font-condensed text-sm tracking-wider text-white/40 mt-1">
                         {product.subtitle}
                       </p>
                     </div>
-                    <div className="text-white/10 group-hover:text-blue-light/30 transition-colors duration-500">
+                    <div className="text-white/10 group-hover:text-red/30 transition-colors duration-500">
                       <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
                         <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
@@ -87,15 +91,12 @@ export default function Products() {
                   </p>
 
                   <div className="mt-6 pt-6 border-t border-white/5">
-                    <a
-                      href="#contact"
-                      className="font-condensed text-sm tracking-[0.2em] uppercase text-white/40 group-hover:text-blue-light transition-colors duration-300 flex items-center gap-2"
-                    >
-                      Request a Quote <TireIcon className="w-3.5 h-3.5 transition-transform duration-1000 group-hover:rotate-[360deg]" />
-                    </a>
+                    <span className="font-condensed text-sm tracking-[0.2em] uppercase text-white/40 group-hover:text-red transition-colors duration-300 flex items-center gap-2">
+                      Browse Catalog <TireIcon className="w-3.5 h-3.5 transition-transform duration-1000 group-hover:rotate-[360deg]" />
+                    </span>
                   </div>
                 </div>
-              </div>
+              </a>
             </ScrollReveal>
           ))}
         </div>

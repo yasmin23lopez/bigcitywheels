@@ -101,7 +101,7 @@ export default function ClosingSection() {
   const w8 = useTransform(scrollYProgress, [0.78, 0.92], [0, 1]);
 
   return (
-    <section ref={sectionRef} className="relative h-[200vh] bg-black">
+    <section ref={sectionRef} className="relative h-[200vh] bg-[#3B3B3B]">
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* 3D Wheels */}
         <div className="absolute inset-0 z-0">

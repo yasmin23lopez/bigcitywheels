@@ -105,7 +105,7 @@ export default function Testimonials() {
   const handlePrev = () => setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
 
   return (
-    <section className="relative py-24 sm:py-32 bg-background overflow-hidden">
+    <section className="relative py-24 sm:py-32 bg-[#3B3B3B] overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="text-center mb-14">

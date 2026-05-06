@@ -105,6 +105,11 @@
   -ms-overflow-style: none;
 }
 
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 *::-webkit-scrollbar {
   display: none;
 }

@@ -11,32 +11,36 @@ const menuItems = [
     href: "/tires",
     sections: [
       {
-        title: "By Category",
+        title: "All Brands",
         links: [
-          { label: "All-Terrain", href: "/tires" },
-          { label: "Highway", href: "/tires" },
-          { label: "Mud-Terrain", href: "/tires" },
-          { label: "All-Season", href: "/tires" },
-          { label: "Performance", href: "/tires" },
-        ],
-      },
-      {
-        title: "By Vehicle",
-        links: [
-          { label: "Pickup Trucks", href: "/tires" },
-          { label: "SUV / CUV", href: "/tires" },
-          { label: "Sedan / Coupe", href: "/tires" },
-          { label: "3/4 Ton & 3500", href: "/tires" },
-        ],
-      },
-      {
-        title: "Popular Brands",
-        links: [
-          { label: "BFGoodrich", href: "/tires" },
-          { label: "Nitto", href: "/tires" },
-          { label: "Toyo", href: "/tires" },
-          { label: "Falken", href: "/tires" },
-          { label: "Cooper", href: "/tires" },
+          { label: "Accelera", href: "/tires?brand=ACCELERA" },
+          { label: "Dunlop", href: "/tires?brand=DUNLOP" },
+          { label: "Evergreen", href: "/tires?brand=EVERGREEN" },
+          { label: "Farroad", href: "/tires?brand=FARROAD" },
+          { label: "Fullway", href: "/tires?brand=FULLWAY" },
+          { label: "Goodyear", href: "/tires?brand=GOODYEAR" },
+          { label: "Gritmaster", href: "/tires?brand=GRITMASTER" },
+          { label: "Hankook", href: "/tires?brand=HANKOOK" },
+          { label: "Haida", href: "/tires?brand=HAIDA" },
+          { label: "Kanati", href: "/tires?brand=KANATI" },
+          { label: "Landspider", href: "/tires?brand=LANDSPIDER" },
+          { label: "Landgolden", href: "/tires?brand=LANDGOLDEN" },
+          { label: "Lexani", href: "/tires?brand=LEXANI" },
+          { label: "Lionhart", href: "/tires?brand=LIONHART" },
+          { label: "Mastertrack", href: "/tires?brand=MASTERTRACK" },
+          { label: "Nebula", href: "/tires?brand=NEBULA" },
+          { label: "Nitto", href: "/tires?brand=NITTO" },
+          { label: "Predator", href: "/tires?brand=PREDATOR" },
+          { label: "Pirelli", href: "/tires?brand=PIRELLI" },
+          { label: "Roadone", href: "/tires?brand=ROADONE" },
+          { label: "Royalblack", href: "/tires?brand=ROYALBLACK" },
+          { label: "Radar", href: "/tires?brand=RADAR" },
+          { label: "Toyo", href: "/tires?brand=TOYO" },
+          { label: "Travelstar", href: "/tires?brand=TRAVELSTAR" },
+          { label: "Suretrac", href: "/tires?brand=SURETRAC" },
+          { label: "Trailer", href: "/tires?brand=TRAILER" },
+          { label: "Vogue", href: "/tires?brand=VOGUE" },
+          { label: "Zeta", href: "/tires?brand=ZETA" },
         ],
       },
     ],
@@ -46,29 +50,55 @@ const menuItems = [
     href: "/wheels",
     sections: [
       {
-        title: "By Style",
+        title: "All Brands",
         links: [
-          { label: "Off-Road", href: "/wheels" },
-          { label: "Street / Sport", href: "/wheels" },
-          { label: "Classic / Chrome", href: "/wheels" },
-          { label: "Matte & Black", href: "/wheels" },
+          { label: "American Force", href: "/wheels?brand=AMERICAN+FORCE" },
+          { label: "Artis", href: "/wheels?brand=ARFIS" },
+          { label: "AXE", href: "/wheels?brand=AXE" },
+          { label: "AXD Offroad", href: "/wheels?brand=AXD" },
+          { label: "Aodhan", href: "/wheels?brand=AODHAN" },
+          { label: "Built Offroad", href: "/wheels?brand=BUILT+OFFROAD" },
+          { label: "Curva Concept", href: "/wheels?brand=CURVA" },
+          { label: "Dolce", href: "/wheels?brand=DOLCE" },
+          { label: "DRW", href: "/wheels?brand=DRW" },
+          { label: "Defy", href: "/wheels?brand=DEFY" },
+          { label: "Forgiato", href: "/wheels?brand=FORGIATO" },
+          { label: "Giovanna", href: "/wheels?brand=GIOVANNA" },
+          { label: "Gianelle", href: "/wheels?brand=GIANELLE" },
+          { label: "Hardcore Offroad", href: "/wheels?brand=HARDCORE" },
+          { label: "Koko Kulture", href: "/wheels?brand=KOKO" },
+          { label: "Katana Racing", href: "/wheels?brand=KATANA" },
+          { label: "Legion Offroad", href: "/wheels?brand=LEGION" },
+          { label: "Lexani", href: "/wheels?brand=LEXANI" },
+          { label: "Lethal Offroad", href: "/wheels?brand=LETHAL" },
+          { label: "Mach Performance", href: "/wheels?brand=MACH" },
+          { label: "Replica", href: "/wheels?brand=REPLICA" },
+          { label: "Scorpion", href: "/wheels?brand=SCORPION" },
+          { label: "STR", href: "/wheels?brand=STR" },
+          { label: "Revolution Racing", href: "/wheels?brand=REVOLUTION" },
+          { label: "Revenge Offroad", href: "/wheels?brand=REVENGE" },
+          { label: "TW Offroad", href: "/wheels?brand=TW+OFFROAD" },
+          { label: "US Mag", href: "/wheels?brand=US+MAG" },
+          { label: "VCT", href: "/wheels?brand=VCT" },
+          { label: "Wraith", href: "/wheels?brand=WRAITH" },
+          { label: "Wicked Offroad", href: "/wheels?brand=WICKED" },
+          { label: "2Crave", href: "/wheels?brand=2CRAVE" },
         ],
       },
+    ],
+  },
+  {
+    label: "Lift Kits",
+    href: "/services/lift-kits",
+    sections: [
       {
-        title: "By Size",
+        title: "By Make",
         links: [
-          { label: '17" – 18"', href: "/wheels" },
-          { label: '20" – 22"', href: "/wheels" },
-          { label: '24" +', href: "/wheels" },
-        ],
-      },
-      {
-        title: "Popular Brands",
-        links: [
-          { label: "Fuel", href: "/wheels" },
-          { label: "Moto Metal", href: "/wheels" },
-          { label: "XD Series", href: "/wheels" },
-          { label: "American Force", href: "/wheels" },
+          { label: "Chevy / GMC", href: "/services/lift-kits" },
+          { label: "Ford", href: "/services/lift-kits" },
+          { label: "Dodge", href: "/services/lift-kits" },
+          { label: "Jeep", href: "/services/lift-kits" },
+          { label: "Nissan", href: "/services/lift-kits" },
         ],
       },
     ],
@@ -78,27 +108,12 @@ const menuItems = [
     href: "/services",
     sections: [
       {
-        title: "Installation",
+        title: "What We Do",
         links: [
           { label: "Tire Mounting & Balancing", href: "/services/tires" },
           { label: "Rim Installation", href: "/services/rims" },
           { label: "Wheel Alignment", href: "/services/alignment" },
-        ],
-      },
-      {
-        title: "Suspension",
-        links: [
-          { label: "Lift Kits", href: "/services/lift-kits" },
-          { label: "Leveling Kits", href: "/services/lift-kits" },
-          { label: "Full Suspension Upgrades", href: "/services/lift-kits" },
-        ],
-      },
-      {
-        title: "Why Big City",
-        links: [
-          { label: "Free Alignment w/ Purchase", href: "/services" },
-          { label: "Same-Day Service", href: "/services" },
-          { label: "Request a Quote", href: "/contact" },
+          { label: "Accessories", href: "/accessories" },
         ],
       },
     ],
@@ -165,6 +180,22 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#0a0a0a]">
+      {/* Promo Banner */}
+      <div className="bg-gradient-to-r from-red via-red-dark to-red py-5 sm:py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <span className="text-2xl leading-none">🔥</span>
+          <span className="font-condensed text-sm sm:text-base font-bold tracking-[0.12em] uppercase text-white text-center">
+            Buy 3 Tires, Get the 4th 50% Off — Limited Time
+          </span>
+          <a
+            href="#contact"
+            className="font-condensed text-xs sm:text-sm font-bold tracking-[0.1em] uppercase text-white/80 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-2 transition-all"
+            style={{ clipPath: "polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)" }}
+          >
+            Claim Now
+          </a>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-28 sm:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_auto] gap-14 lg:gap-10">
 
@@ -179,42 +210,42 @@ export default function Footer() {
                 className="w-20 h-20 sm:w-24 sm:h-24"
               />
               <div>
-                <h3 className="font-display text-base sm:text-lg font-bold uppercase tracking-wider text-white">
-                  Big City Wheels
+                <h3 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">
+                  Big City<br/>Wheels & Tires
                 </h3>
-                <p className="font-condensed text-xs tracking-[0.2em] uppercase text-white/30 mt-0.5">
-                  Tires · Rims · Suspension
-                </p>
               </div>
             </div>
 
             {/* Contact info — with icons */}
-            <div className="space-y-3">
-              <span className="inline-flex items-center gap-2 bg-white/[0.06] font-condensed text-xs tracking-[0.25em] uppercase font-semibold px-4 py-2 text-white/60">
+            <div className="space-y-4">
+              <span className="inline-flex items-center gap-2 bg-white/[0.06] font-condensed text-sm tracking-[0.2em] uppercase font-semibold px-4 py-2 text-white/60">
                 <span className={`w-2 h-2 rounded-full ${isOpen ? "bg-green-500 animate-pulse" : "bg-red animate-pulse"}`} />
                 Crosby, TX — {badgeText}
               </span>
+            </div>
+
+            <div className="space-y-3">
 
               <div className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="w-5 h-5 text-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                <p className="font-body text-sm text-white/50">4343 US-90, Crosby, TX 77532</p>
+                <p className="font-body text-xl text-white/50">4343 US-90, Crosby, TX 77532</p>
               </div>
 
               <div className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="w-5 h-5 text-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                 </svg>
-                <a href="tel:7135615519" className="font-body text-sm text-white/50 hover:text-red transition-colors">(713) 561-5519</a>
+                <a href="tel:7135615519" className="font-body text-xl text-white/50 hover:text-red transition-colors">(713) 561-5519</a>
               </div>
 
               <div className="flex items-center gap-3">
-                <svg className="w-4 h-4 text-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="w-5 h-5 text-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
-                <a href="mailto:Bcwtires@gmail.com" className="font-body text-sm text-white/50 hover:text-red transition-colors">Bcwtires@gmail.com</a>
+                <a href="mailto:Bcwtires@gmail.com" className="font-body text-xl text-white/50 hover:text-red transition-colors">Bcwtires@gmail.com</a>
               </div>
             </div>
 
@@ -246,7 +277,7 @@ export default function Footer() {
                   {item.sections ? (
                     <button
                       onClick={() => toggleSubmenu(item.label)}
-                      className={`w-full px-5 py-3.5 text-sm font-medium tracking-wide text-left transition-all duration-200 border-b border-white/[0.08] flex items-center justify-between ${
+                      className={`w-full px-5 py-3.5 text-base font-medium tracking-wide text-left transition-all duration-200 border-b border-white/[0.08] flex items-center justify-between ${
                         activeSubmenu === item.label ? "text-red bg-white/[0.03]" : "text-white/50 hover:text-white hover:bg-white/[0.03]"
                       }`}
                     >
@@ -261,7 +292,7 @@ export default function Footer() {
                   ) : (
                     <a
                       href={item.href}
-                      className="block px-5 py-3.5 text-sm font-medium tracking-wide text-white/50 hover:text-white hover:bg-white/[0.03] transition-all duration-200 border-b border-white/[0.08]"
+                      className="block px-5 py-3.5 text-base font-medium tracking-wide text-white/50 hover:text-white hover:bg-white/[0.03] transition-all duration-200 border-b border-white/[0.08]"
                     >
                       {item.label}
                     </a>
@@ -280,15 +311,15 @@ export default function Footer() {
                         <div className="px-5 py-4 space-y-4">
                           {item.sections.map((section) => (
                             <div key={section.title}>
-                              <h5 className="font-condensed text-[10px] font-bold tracking-[0.3em] uppercase text-red/70 mb-2">
+                              <h5 className="font-condensed text-xs font-bold tracking-[0.25em] uppercase text-red/70 mb-2">
                                 {section.title}
                               </h5>
-                              <div className="flex flex-wrap gap-x-3 gap-y-1">
+                              <div className="flex flex-wrap gap-x-3 gap-y-2">
                                 {section.links.map((link) => (
                                   <a
                                     key={link.label}
                                     href={link.href}
-                                    className="font-body text-sm text-white/40 hover:text-white transition-colors duration-200"
+                                    className="font-body text-sm sm:text-base text-white/40 hover:text-white transition-colors duration-200 py-1"
                                   >
                                     {link.label}
                                   </a>
@@ -307,7 +338,7 @@ export default function Footer() {
             {/* CTA */}
             <a
               href="tel:7135615519"
-              className="mt-3 flex items-center justify-between bg-white text-black font-display text-sm font-bold tracking-[0.15em] uppercase px-5 py-3.5 hover:bg-red hover:text-white transition-all duration-300 group"
+              className="mt-3 flex items-center justify-between bg-white text-black font-display text-base font-bold tracking-[0.12em] uppercase px-5 py-4 hover:bg-red hover:text-white transition-all duration-300 group"
               style={{
                 clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)",
               }}
@@ -322,12 +353,12 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/25">
+          <p className="text-base text-white/25">
             &copy;{" "}{new Date().getFullYear()}{" "}Big City Wheels &amp; Tires. All Rights Reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-sm text-white/25 hover:text-white/50 transition-colors">Privacy Policy</a>
-            <a href="#" className="text-sm text-white/25 hover:text-white/50 transition-colors">Terms</a>
+            <a href="/privacy" className="text-base text-white/25 hover:text-white/50 transition-colors">Privacy Policy</a>
+            <a href="/terms" className="text-base text-white/25 hover:text-white/50 transition-colors">Terms</a>
           </div>
         </div>
       </div>

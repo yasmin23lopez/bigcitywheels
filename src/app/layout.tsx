@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import FloatingQuotePopup from "@/components/FloatingQuotePopup";
+import { QuoteCartProvider } from "@/components/QuoteCartContext";
+import QuoteCartSidebar from "@/components/QuoteCartSidebar";
 
 export const metadata: Metadata = {
   title: "Big City Wheels & Tires | Crosby, TX — Tires, Rims, Lift Kits & More",
@@ -29,12 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="noise-overlay min-h-full flex flex-col">
-        <GridLines />
-        <Preloader />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <FloatingQuotePopup />
+        <QuoteCartProvider>
+          <GridLines />
+          <Preloader />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <FloatingQuotePopup />
+          <QuoteCartSidebar />
+        </QuoteCartProvider>
       </body>
     </html>
   );

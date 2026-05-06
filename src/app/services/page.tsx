@@ -1,6 +1,7 @@
 import PageHeader from "@/components/PageHeader";
 import Badge from "@/components/Badge";
 import TireIcon from "@/components/TireIcon";
+import BrandsSlider from "@/components/BrandsSlider";
 import Link from "next/link";
 
 const services = [
@@ -72,14 +73,14 @@ export default function ServicesPage() {
         image="https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=1400&q=80&fit=crop"
       />
 
-      <section className="py-20 sm:py-28 bg-[#050505]">
+      <section className="py-20 sm:py-28 bg-[#3B3B3B]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, i) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group bg-white/[0.02] border border-white/[0.06] hover:border-red/30 p-8 sm:p-10 transition-all duration-300 hover:bg-white/[0.04]"
+                className="group bg-white/[0.03] border border-white/[0.06] hover:border-red/30 p-8 sm:p-10 transition-all duration-300 hover:bg-white/[0.05]"
                 style={{
                   clipPath: i % 2 === 0
                     ? "polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%)"
@@ -110,6 +111,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+      <BrandsSlider />
     </>
   );
 }
