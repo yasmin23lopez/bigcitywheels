@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Environment } from "@react-three/drei";
@@ -25,16 +25,16 @@ const WheelModel = ({ scrollProgress }: { scrollProgress: number }) => {
   useFrame(() => {
     if (!groupRef.current) return;
 
-    // Assembly: 0-25% scroll
-    const assemblyProgress = Math.min(scrollProgress / 0.25, 1);
+    // Assembly: 0-50% of animation
+    const assemblyProgress = Math.min(scrollProgress / 0.5, 1);
     const explodeOffset = (1 - assemblyProgress) * 1.2;
 
-    // Rotation: starts at 20%, 1 full rotation
-    const rotationProgress = Math.max(0, (scrollProgress - 0.2) / 0.4);
-    const rotation = rotationProgress * Math.PI * 2;
+    // Rotation: does ~1.75 rotations, ends slightly before full turn (showing rim face)
+    const rotationProgress = Math.min(1, Math.max(0, (scrollProgress - 0.3) / 0.7));
+    const rotation = rotationProgress * Math.PI * 3.6;
 
     groupRef.current.rotation.y = rotation;
-    groupRef.current.scale.setScalar(5.5); // Always visible and big
+    groupRef.current.scale.setScalar(6.2); // Always visible and big
 
     meshes.forEach((mesh, index) => {
       const direction = index === 0 ? -1 : 1;
@@ -56,7 +56,7 @@ const Scene = ({ scrollProgress }: { scrollProgress: number }) => {
   useFrame(() => {
     camera.position.z = 4;
     camera.position.y = 0.3;
-    camera.position.x = Math.sin(scrollProgress * Math.PI) * 0.2;
+    camera.position.x = 0;
     camera.lookAt(0, 0, 0);
   });
 
@@ -73,43 +73,68 @@ const Scene = ({ scrollProgress }: { scrollProgress: number }) => {
   );
 };
 
-export default function Hero() {
+export default function Hero({ promos }: { promos?: any[] | null }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [animProgress, setAnimProgress] = useState(0);
+  const [animDone, setAnimDone] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
+  // Auto-play animation on mount (after preloader)
   useEffect(() => {
-    return scrollYProgress.on("change", (v) => {
-      setScrollProgress(v);
-    });
-  }, [scrollYProgress]);
+    const delay = sessionStorage.getItem("preloaderShown") ? 500 : 3000; // wait for preloader
+    const startTime = Date.now() + delay;
+    const duration = 3500; // 3.5s animation
 
-  // Text reveals in steps, synced with wheel assembly
-  // "Big wheels" starts at 50% visible
-  const line1Opacity = useTransform(scrollYProgress, [0, 0.03], [0.5, 1]);
-  const line1Y = useTransform(scrollYProgress, [0, 0.04], [20, 0]);
-
-  // Step 2: "start in a" (3-6%)
-  const line2Opacity = useTransform(scrollYProgress, [0.03, 0.06], [0, 1]);
-  const line2Y = useTransform(scrollYProgress, [0.03, 0.06], [30, 0]);
-
-  // Step 3: "big city." (6-9%)
-  const line3Opacity = useTransform(scrollYProgress, [0.06, 0.09], [0, 1]);
-  const line3Y = useTransform(scrollYProgress, [0.06, 0.09], [30, 0]);
-
-  // Step 4: Tagline + CTA (9-11%) - appears right after big city
-  const ctaOpacity = useTransform(scrollYProgress, [0.09, 0.11], [0, 1]);
-
-  // CTA also appears after a timed delay so it's visible before scrolling
-  const [ctaVisible, setCtaVisible] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => setCtaVisible(true), 2500);
-    return () => clearTimeout(timer);
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed < 0) {
+        requestAnimationFrame(animate);
+        return;
+      }
+      const progress = Math.min(elapsed / duration, 1);
+      setAnimProgress(progress);
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setAnimDone(true);
+      }
+    };
+    requestAnimationFrame(animate);
   }, []);
+
+  // Use animProgress for the wheel (time-based, auto)
+  // scrollProgress is only used after animation is done (for the scroll-away effect)
+  const scrollProgress = animProgress;
+
+  // Text reveals based on animation progress
+  const line1Opacity = useMotionValue(0);
+  const line1Y = useMotionValue(30);
+  const line2Opacity = useMotionValue(0);
+  const line2Y = useMotionValue(30);
+  const line3Opacity = useMotionValue(0);
+  const line3Y = useMotionValue(30);
+  const ctaOpacity = useMotionValue(0);
+
+  useEffect(() => {
+    const p = animProgress;
+    // Line 1: "Big wheels" — 0-30%
+    line1Opacity.set(Math.min(1, p / 0.3));
+    line1Y.set(Math.max(0, 30 - (p / 0.3) * 30));
+    // Line 2: "start in a" — 25-55%
+    line2Opacity.set(p < 0.25 ? 0 : Math.min(1, (p - 0.25) / 0.3));
+    line2Y.set(p < 0.25 ? 30 : Math.max(0, 30 - ((p - 0.25) / 0.3) * 30));
+    // Line 3: "big city." — 50-80%
+    line3Opacity.set(p < 0.5 ? 0 : Math.min(1, (p - 0.5) / 0.3));
+    line3Y.set(p < 0.5 ? 30 : Math.max(0, 30 - ((p - 0.5) / 0.3) * 30));
+    // CTA + other elements — 80-100%
+    ctaOpacity.set(p < 0.8 ? 0 : Math.min(1, (p - 0.8) / 0.2));
+  }, [animProgress, line1Opacity, line1Y, line2Opacity, line2Y, line3Opacity, line3Y, ctaOpacity]);
+  // CTA visibility handled by animProgress above
+  const ctaVisible = animDone;
 
   const [badgeText, setBadgeText] = useState("Crosby, TX — Now Open");
   const [isOpen, setIsOpen] = useState(true);
@@ -164,9 +189,9 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative h-[250vh] bg-[#3B3B3B]"
+      className="relative h-[100vh] bg-[#2142A1]"
     >
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
+      <div className="h-screen flex flex-col items-center justify-center">
         {/* 3D Wheel - Behind everything */}
         <div className="absolute inset-0 z-0">
           <Canvas camera={{ position: [0, 0.3, 4], fov: 45 }}>
@@ -178,27 +203,14 @@ export default function Hero() {
 
         {/* Main Content - On top */}
         <div className="relative z-10 text-center px-4">
-          {/* Promo Banner - Above headline */}
+          {/* Promo Banner - appears after animation */}
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            style={{ opacity: ctaOpacity }}
             className="mb-6"
           >
-            <div
-              className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-red via-red-dark to-red px-4 sm:px-8 py-2.5 sm:py-3 border border-white/10 shadow-[0_0_30px_rgba(229,0,16,0.3)]"
-              style={{
-                clipPath: "polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%)",
-              }}
-            >
-              <span className="text-lg sm:text-xl leading-none">🔥</span>
-              <span className="font-condensed text-[11px] sm:text-sm font-bold tracking-[0.08em] sm:tracking-[0.12em] uppercase text-white">
-                Buy 3 Tires, Get the 4th 50% Off
-              </span>
-              <span className="hidden sm:inline font-condensed text-xs tracking-[0.1em] uppercase text-white/60">
-                — Limited Time
-              </span>
-            </div>
+            <span className="font-condensed text-[36px] font-bold tracking-[0.25em] uppercase text-white">
+              Quality tires for every budget
+            </span>
           </motion.div>
 
           {/* Headline - "Big wheels start in a big city." */}
@@ -224,10 +236,7 @@ export default function Hero() {
           {/* CTA */}
           <motion.div
             style={{ opacity: ctaOpacity }}
-            animate={ctaVisible ? { opacity: 1, y: 0 } : undefined}
-            initial={{ y: 15 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className={`mt-8 ${ctaVisible ? "!opacity-100" : ""}`}
+            className="mt-8"
           >
             <a
               href="/wheels"
@@ -242,11 +251,9 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Badge - Bottom left */}
+        {/* Badge - Bottom left - appears after animation */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          style={{ opacity: ctaOpacity }}
           className="absolute bottom-8 left-6 sm:left-10 z-20"
         >
           <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-condensed text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold px-4 py-2 border border-white/20">

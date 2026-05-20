@@ -98,10 +98,11 @@ export default function ClosingSection() {
   const w5 = useTransform(scrollYProgress, [0.55, 0.67], [0, 1]);
   const w6 = useTransform(scrollYProgress, [0.60, 0.74], [0, 1]);
   const w7 = useTransform(scrollYProgress, [0.72, 0.82], [0, 1]);
-  const w8 = useTransform(scrollYProgress, [0.78, 0.92], [0, 1]);
+  const w8 = useTransform(scrollYProgress, [0.75, 0.85], [0, 1]);
+  const w9 = useTransform(scrollYProgress, [0.82, 0.95], [0, 1]);
 
   return (
-    <section ref={sectionRef} className="relative h-[200vh] bg-[#3B3B3B]">
+    <section ref={sectionRef} className="relative h-[200vh] bg-[#2142A1]">
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* 3D Wheels */}
         <div className="absolute inset-0 z-0">
@@ -127,7 +128,8 @@ export default function ClosingSection() {
             </p>
             <p className="font-display text-[clamp(2.2rem,6vw,5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
               <FillWord progress={w7}>in</FillWord>{' '}
-              <FillWord progress={w8}>Texas.</FillWord>
+              <FillWord progress={w8}>Crosby,</FillWord>{' '}
+              <FillWord progress={w9}>Texas.</FillWord>
             </p>
           </div>
         </div>

@@ -37,7 +37,7 @@ function parseTireType(desc: string): string | null {
 
 const ITEMS_PER_PAGE = 20;
 
-export default function TiresCatalog() {
+export default function TiresCatalog({ hiddenProducts = [], customProducts = [] }: { hiddenProducts?: string[]; customProducts?: any[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -54,7 +54,19 @@ export default function TiresCatalog() {
   useEffect(() => {
     fetch("/data/tires-catalog.json")
       .then((r) => r.json())
-      .then((data) => {
+      .then((data: Catalog) => {
+        if (hiddenProducts.length > 0) {
+          Object.keys(data).forEach(brand => {
+            data[brand] = data[brand].filter(p => !hiddenProducts.includes(p.part));
+          });
+        }
+        if (customProducts.length > 0) {
+          customProducts.forEach((cp: any) => {
+            const brand = cp.subcategory || cp.brand || "Other";
+            if (!data[brand]) data[brand] = [];
+            data[brand].push({ part: cp.partNumber, desc: cp.name, price: "", image: cp.imageUrl || null });
+          });
+        }
         setCatalog(data);
         const brandParam = searchParams.get("brand");
         if (brandParam) {
@@ -64,7 +76,7 @@ export default function TiresCatalog() {
           if (match) setActiveBrand(match);
         }
       });
-  }, [searchParams]);
+  }, [searchParams, hiddenProducts, customProducts]);
 
   const brands = Object.keys(catalog);
 
@@ -155,7 +167,7 @@ export default function TiresCatalog() {
             className={`px-3 py-3 font-condensed text-xs sm:text-sm tracking-[0.05em] uppercase text-center transition-all duration-200 border ${
               activeBrand === brand
                 ? "bg-red text-white border-red font-bold"
-                : "bg-white/[0.03] text-white/50 border-white/[0.06] hover:border-red/40 hover:text-white"
+                : "bg-white text-gray-600 border-gray-200 hover:border-red/40 hover:text-gray-900 shadow-sm"
             }`}
             style={{
               clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
@@ -230,17 +242,7 @@ export default function TiresCatalog() {
                       ))}
                     </select>
                   )}
-                  <select
-                    value={priceRange}
-                    onChange={(e) => { setPriceRange(e.target.value); setCurrentPage(1); }}
-                    className="px-4 py-2.5 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-red/50 appearance-none cursor-pointer flex-shrink-0 min-h-[44px]"
-                  >
-                    <option value="">All Prices</option>
-                    <option value="0-100">Under $100</option>
-                    <option value="100-200">$100 – $200</option>
-                    <option value="200-400">$200 – $400</option>
-                    <option value="400+">$400+</option>
-                  </select>
+                  
                   <select
                     value={sortBy}
                     onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
@@ -300,7 +302,7 @@ export default function TiresCatalog() {
                           </div>
                         )}
                         <p className="font-body text-xs font-bold text-gray-800 line-clamp-2 mb-1">{product.desc}</p>
-                        {product.price && product.price !== "" && product.price !== "-" && (
+                        {false && product.price && product.price !== "" && product.price !== "-" && (
                           <span className="font-display text-sm font-bold text-gray-900 mb-2">
                             {product.price.startsWith("$") ? product.price : `$${product.price}`}
                           </span>
@@ -332,7 +334,7 @@ export default function TiresCatalog() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-0">
-                          {product.price && product.price !== "" && product.price !== "-" && (
+                          {false && product.price && product.price !== "" && product.price !== "-" && (
                             <span className="font-display text-base font-bold text-gray-900">
                               {product.price.startsWith("$") ? product.price : `$${product.price}`}
                             </span>
@@ -433,7 +435,7 @@ export default function TiresCatalog() {
 
       {!activeBrand && (
         <div className="text-center py-12">
-          <p className="font-body text-base text-white/40">Select a brand above to browse tires</p>
+          <p className="font-body text-base text-gray-400">Select a brand above to browse tires</p>
         </div>
       )}
 

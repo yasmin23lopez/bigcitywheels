@@ -31,19 +31,23 @@ export function useQuoteCart() {
 }
 
 export function QuoteCartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<QuoteItem[]>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("quoteCart");
-      return saved ? JSON.parse(saved) : [];
-    }
-    return [];
-  });
+  const [items, setItems] = useState<QuoteItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Load from localStorage after hydration
+  useEffect(() => {
+    const saved = localStorage.getItem("quoteCart");
+    if (saved) setItems(JSON.parse(saved));
+    setHydrated(true);
+  }, []);
 
   // Persist to localStorage
   useEffect(() => {
-    localStorage.setItem("quoteCart", JSON.stringify(items));
-  }, [items]);
+    if (hydrated) {
+      localStorage.setItem("quoteCart", JSON.stringify(items));
+    }
+  }, [items, hydrated]);
 
   const addItem = (item: Omit<QuoteItem, "quantity">, qty = 1) => {
     setItems((prev) => {

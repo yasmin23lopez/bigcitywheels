@@ -10,7 +10,14 @@ export default function Preloader() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Only show preloader on first visit
+    if (sessionStorage.getItem("preloaderShown")) {
+      setVisible(false);
+      setDone(true);
+      return;
+    }
     setMounted(true);
+    sessionStorage.setItem("preloaderShown", "true");
   }, []);
 
   useEffect(() => {

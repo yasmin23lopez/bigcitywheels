@@ -33,8 +33,8 @@ export default function PrivacyPage() {
           <h2 className="font-display text-xl font-bold text-white uppercase tracking-wider">6. Your Rights</h2>
           <p>You may request deletion of any personal information we hold about you by contacting us directly. We will respond to such requests within 30 days.</p>
 
-          <h2 className="font-display text-xl font-bold text-white uppercase tracking-wider">7. Contact</h2>
-          <p>For privacy-related questions, contact us at <a href="mailto:Bcwtires@gmail.com" className="text-red hover:text-red-dark">Bcwtires@gmail.com</a> or call <a href="tel:7135615519" className="text-red hover:text-red-dark">(713) 561-5519</a>.</p>
+          <h2 className="font-display text-xl font-bold text-white uppercase tracking-wider">7. Contact</h2>p
+          <p>For privacy-related questions, contact us at <a href="mailto:bcwtires@gmail.com" className="text-red hover:text-red-dark">bcwtires@gmail.com</a> or call <a href="tel:7135615519" className="text-red hover:text-red-dark">(713) 561-5519</a>.</p>
         </div>
       </div>
     </section>

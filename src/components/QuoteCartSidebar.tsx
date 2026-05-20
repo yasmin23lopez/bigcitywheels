@@ -20,7 +20,7 @@ export default function QuoteCartSidebar() {
       .join("\n");
 
     const data = {
-      access_key: "YOUR_WEB3FORMS_KEY",
+      access_key: "6d3e4d22-8893-497a-bf83-c09db35d4dd2",
       subject: `Quote Request from ${formState.name}`,
       from_name: formState.name,
       phone: formState.phone,

@@ -34,7 +34,7 @@ export default function TermsPage() {
           <p>All content on this website, including text, images, logos, and design elements, is the property of Big City Wheels & Tires and is protected by applicable intellectual property laws.</p>
 
           <h2 className="font-display text-xl font-bold text-white uppercase tracking-wider">7. Contact</h2>
-          <p>For questions about these terms, contact us at <a href="mailto:Bcwtires@gmail.com" className="text-red hover:text-red-dark">Bcwtires@gmail.com</a> or call <a href="tel:7135615519" className="text-red hover:text-red-dark">(713) 561-5519</a>.</p>
+          <p>For questions about these terms, contact us at <a href="mailto:bcwtires@gmail.com" className="text-red hover:text-red-dark">bcwtires@gmail.com</a> or call <a href="tel:7135615519" className="text-red hover:text-red-dark">(713) 561-5519</a>.</p>
         </div>
       </div>
     </section>

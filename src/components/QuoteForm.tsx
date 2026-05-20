@@ -14,8 +14,25 @@ export default function QuoteForm({ variant = "section", onClose }: QuoteFormPro
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "6d3e4d22-8893-497a-bf83-c09db35d4dd2",
+          subject: `Contact Form - ${formState.name}`,
+          from_name: formState.name,
+          phone: formState.phone,
+          email: formState.email,
+          vehicle: formState.vehicle,
+          message: formState.message,
+        }),
+      });
+    } catch {}
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);

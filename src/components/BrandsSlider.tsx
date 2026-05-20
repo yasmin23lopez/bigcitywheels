@@ -42,9 +42,9 @@ export default function BrandsSlider() {
                   width={140}
                   height={40}
                   className={`w-auto object-contain opacity-40 transition-opacity duration-300 brightness-0 invert ${
-                    brand.name === "Nissan" || brand.name === "Ford" ? "max-h-10 max-w-[100px]" :
-                    brand.name === "Jeep" ? "max-h-7 max-w-[90px]" :
-                    "max-h-8 max-w-[120px]"
+                    brand.name === "Nissan" || brand.name === "Ford" ? "max-h-10 max-w-[100px] w-auto h-auto" :
+                    brand.name === "Jeep" ? "max-h-7 max-w-[90px] w-auto h-auto" :
+                    "max-h-8 max-w-[120px] w-auto h-auto"
                   }`}
                 />
               )}

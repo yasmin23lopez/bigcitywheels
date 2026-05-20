@@ -136,9 +136,7 @@ export default function AccessoriesCatalog() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="font-display text-lg font-bold text-gray-900">
-                          ${product.price.toFixed(2)}
-                        </span>
+                        {/* Price hidden - data preserved */}
                         <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
                           <button
                             onClick={() => {

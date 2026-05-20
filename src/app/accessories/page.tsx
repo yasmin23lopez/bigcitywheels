@@ -5,7 +5,7 @@ import AccessoriesCatalog from "@/components/AccessoriesCatalog";
 export default function AccessoriesPage() {
   return (
     <>
-      <section className="pt-52 pb-20 sm:pt-60 sm:pb-28 bg-[#3B3B3B]">
+      <section className="pt-52 pb-20 sm:pt-60 sm:pb-28 bg-[#e8e8e8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge>Shop</Badge>

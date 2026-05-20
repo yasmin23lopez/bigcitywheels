@@ -37,7 +37,15 @@ function parseFinish(desc: string): string | null {
   return null;
 }
 
-export default function WheelsCatalog() {
+interface CustomProduct {
+  name: string;
+  partNumber: string;
+  brand: string;
+  subcategory?: string;
+  imageUrl?: string;
+}
+
+export default function WheelsCatalog({ hiddenProducts = [], customProducts = [] }: { hiddenProducts?: string[]; customProducts?: CustomProduct[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,9 +63,22 @@ export default function WheelsCatalog() {
   useEffect(() => {
     fetch("/data/wheels-catalog.json")
       .then((r) => r.json())
-      .then((data) => {
+      .then((data: Catalog) => {
+        // Filter out hidden products
+        if (hiddenProducts.length > 0) {
+          Object.keys(data).forEach(brand => {
+            data[brand] = data[brand].filter(p => !hiddenProducts.includes(p.part));
+          });
+        }
+        // Merge custom products from Sanity
+        if (customProducts.length > 0) {
+          customProducts.forEach(cp => {
+            const brand = cp.subcategory || cp.brand || "Other";
+            if (!data[brand]) data[brand] = [];
+            data[brand].push({ part: cp.partNumber, desc: cp.name, price: "", image: cp.imageUrl || null });
+          });
+        }
         setCatalog(data);
-        // Check URL param for pre-selected brand
         const brandParam = searchParams.get("brand");
         if (brandParam) {
           const match = Object.keys(data).find(
@@ -66,7 +87,7 @@ export default function WheelsCatalog() {
           if (match) setActiveBrand(match);
         }
       });
-  }, [searchParams]);
+  }, [searchParams, hiddenProducts, customProducts]);
 
   const brands = Object.keys(catalog);
 
@@ -169,7 +190,7 @@ export default function WheelsCatalog() {
             className={`px-3 py-3 font-condensed text-xs sm:text-sm tracking-[0.05em] uppercase text-center transition-all duration-200 border ${
               activeBrand === brand
                 ? "bg-red text-white border-red font-bold"
-                : "bg-white/[0.03] text-white/50 border-white/[0.06] hover:border-red/40 hover:text-white"
+                : "bg-white text-gray-600 border-gray-200 hover:border-red/40 hover:text-gray-900 shadow-sm"
             }`}
             style={{
               clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
@@ -256,17 +277,7 @@ export default function WheelsCatalog() {
                       ))}
                     </select>
                   )}
-                  <select
-                    value={priceRange}
-                    onChange={(e) => { setPriceRange(e.target.value); setCurrentPage(1); }}
-                    className="px-4 py-2.5 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-red/50 appearance-none cursor-pointer flex-shrink-0 min-h-[44px]"
-                  >
-                    <option value="">All Prices</option>
-                    <option value="0-200">Under $200</option>
-                    <option value="200-500">$200 – $500</option>
-                    <option value="500-1000">$500 – $1,000</option>
-                    <option value="1000+">$1,000+</option>
-                  </select>
+                  
                   <select
                     value={sortBy}
                     onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
@@ -326,7 +337,7 @@ export default function WheelsCatalog() {
                           </div>
                         )}
                         <p className="font-body text-xs font-bold text-gray-800 line-clamp-2 mb-1">{product.desc}</p>
-                        {product.price && product.price !== "" && product.price !== "-" && (
+                        {false && product.price && product.price !== "" && product.price !== "-" && (
                           <span className="font-display text-sm font-bold text-gray-900 mb-2">
                             {product.price.startsWith("$") ? product.price : `$${product.price}`}
                           </span>
@@ -358,7 +369,7 @@ export default function WheelsCatalog() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-0">
-                          {product.price && product.price !== "" && product.price !== "-" && (
+                          {false && product.price && product.price !== "" && product.price !== "-" && (
                             <span className="font-display text-base font-bold text-gray-900">
                               {product.price.startsWith("$") ? product.price : `$${product.price}`}
                             </span>
@@ -459,7 +470,7 @@ export default function WheelsCatalog() {
 
       {!activeBrand && (
         <div className="text-center py-12">
-          <p className="font-body text-base text-white/40">
+          <p className="font-body text-base text-gray-400">
             Select a brand above to browse wheels
           </p>
         </div>

@@ -77,9 +77,11 @@ function FaqItem({ faq, index, isOpen, toggle }: { faq: typeof faqs[0]; index: n
   );
 }
 
-export default function FAQ() {
+export default function FAQ({ faqs: sanityFaqs }: { faqs?: { question: string; answer: string }[] | null }) {
   const ref = useRef(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  
+  const faqData = sanityFaqs && sanityFaqs.length > 0 ? sanityFaqs.map(f => ({ q: f.question, a: f.answer })) : faqs;
 
   return (
     <section id="faq" className="relative py-24 sm:py-32 overflow-hidden" ref={ref}>
@@ -99,7 +101,7 @@ export default function FAQ() {
 
         <ScrollReveal>
           <div className="border-t border-card-border">
-            {faqs.map((faq, i) => (
+            {faqData.map((faq, i) => (
               <FaqItem
                 key={i}
                 faq={faq}

@@ -35,16 +35,16 @@ const contactInfo = [
       </svg>
     ),
     title: "Email Us",
-    content: "Bcwtires@gmail.com",
-    action: { label: "Send Email", href: "mailto:Bcwtires@gmail.com" },
+    content: "bcwtires@gmail.com",
+    action: { label: "Send Email", href: "mailto:bcwtires@gmail.com" },
   },
 ];
 
-export default function Contact() {
+export default function Contact({ settings }: { settings?: any }) {
   const ref = useRef(null);
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 overflow-hidden bg-[#050505]" ref={ref}>
+    <section id="contact" className="relative py-24 sm:py-32 overflow-hidden bg-[#3B3B3B]" ref={ref}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-16 sm:mb-20">
           <Badge>Get In Touch</Badge>

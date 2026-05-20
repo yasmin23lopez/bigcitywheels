@@ -73,7 +73,7 @@ export default function ServicesPage() {
         image="https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=1400&q=80&fit=crop"
       />
 
-      <section className="py-20 sm:py-28 bg-[#3B3B3B]">
+      <section className="py-20 sm:py-28 bg-[#2142A1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, i) => (

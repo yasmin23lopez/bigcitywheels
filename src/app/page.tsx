@@ -8,19 +8,27 @@ import Contact from "@/components/Contact";
 import ClosingSection from "@/components/ClosingSection";
 import StairTransition from "@/components/StairTransition";
 import BrandsSlider from "@/components/BrandsSlider";
+import { getSiteSettings, getReviews, getFaqs, getPromos } from "@/sanity/queries";
 
-export default function Home() {
+export default async function Home() {
+  const [settings, reviews, faqs, promos] = await Promise.all([
+    getSiteSettings().catch(() => null),
+    getReviews().catch(() => null),
+    getFaqs().catch(() => null),
+    getPromos().catch(() => null),
+  ]);
+
   return (
     <>
-      <Hero />
+      <Hero promos={promos} />
       <BrandsSlider />
       <StairTransition />
       <Services />
       <VideoSection />
-      <GrandOpening />
-      <Testimonials />
-      <FAQ />
-      <Contact />
+      <GrandOpening promos={promos} />
+      <Testimonials reviews={reviews} />
+      <FAQ faqs={faqs} />
+      <Contact settings={settings} />
       <ClosingSection />
       <BrandsSlider />
     </>

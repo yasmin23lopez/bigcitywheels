@@ -9,74 +9,32 @@ import TireIcon from "@/components/TireIcon";
 
 const reviews = [
   {
-    name: "Carlos M.",
-    vehicle: "2022 RAM 1500",
-    rating: 5,
-    text: "Best tire shop in the Crosby area. They mounted and balanced my 35s in under an hour. Fair prices and the guys really know their stuff. Will definitely be back for my alignment.",
-    time: "2 weeks ago",
-  },
-  {
-    name: "Jessica R.",
-    vehicle: "2021 Chevy Tahoe",
-    rating: 5,
-    text: "Got a full set of Nitto Ridge Grapplers and new Fuel wheels installed. The truck looks amazing. They even helped me pick the right offset. Super professional team.",
-    time: "1 month ago",
-  },
-  {
-    name: "Miguel A.",
-    vehicle: "2023 Ford F-250",
-    rating: 5,
-    text: "Had a 6-inch lift kit installed and the work was flawless. They took their time to make sure everything was perfect. The truck rides smooth and looks incredible.",
-    time: "3 weeks ago",
-  },
-  {
-    name: "David T.",
-    vehicle: "2020 Toyota Tacoma",
-    rating: 5,
-    text: "These guys are the real deal. Came in for an alignment after hitting a pothole and they had me in and out. Truck drives straight as an arrow now. Great customer service.",
-    time: "1 week ago",
-  },
-  {
-    name: "Amanda L.",
-    vehicle: "2022 Jeep Wrangler",
-    rating: 5,
-    text: "Bought mud terrains for my Jeep and they installed them same day. The staff was super friendly and even gave me advice on tire pressure for off-roading. Love this place!",
-    time: "2 months ago",
-  },
-  {
-    name: "Roberto S.",
+    name: "Jesus Torres",
     vehicle: "2021 Chevy Silverado 3500",
     rating: 5,
     text: "Big City hooked up my dually with American Force wheels. They look absolutely insane. The fitment is perfect and the ride quality is still great. 10/10 recommend.",
-    time: "1 month ago",
-  },
-  {
-    name: "Sarah K.",
-    vehicle: "2023 GMC Sierra",
-    rating: 4,
-    text: "Got a leveling kit and new tires. The truck sits perfect now. Only reason for 4 stars is the wait time was a bit long, but the quality of work was excellent.",
-    time: "3 months ago",
-  },
-  {
-    name: "James W.",
-    vehicle: "2020 Ford F-150",
-    rating: 5,
-    text: "Se habla español! That was a huge plus for my dad. They explained everything clearly and the prices were way better than the dealership. New tires and alignment done right.",
     time: "2 weeks ago",
   },
   {
-    name: "Luis G.",
-    vehicle: "2022 RAM 2500",
+    name: "Mario Ruiz del Sol Gonzalez",
+    vehicle: "",
     rating: 5,
-    text: "Third time coming here and they never disappoint. Just got 22-inch XD wheels with Toyo Open Country. The combo is fire. These guys are artists with trucks.",
-    time: "1 month ago",
+    text: "Muy buena atención al cliente, te explican todo sin hacerte sentir perdido. Se nota que saben lo que hacen.",
+    time: "2 weeks ago",
   },
   {
-    name: "Brittany H.",
-    vehicle: "2021 Nissan Titan",
+    name: "Ana Karina Tejeda Ortiz",
+    vehicle: "",
     rating: 5,
-    text: "Found them on Google and so glad I did. Professional, fast, and affordable. They mounted my Cooper AT3s and did an alignment. Truck handles like new. Highly recommend!",
-    time: "3 weeks ago",
+    text: "Excellent experience from start to finish. The team explained everything clearly and got the job done quickly.",
+    time: "2 weeks ago",
+  },
+  {
+    name: "Gustavo Adolfo Pérez Bolaños",
+    vehicle: "",
+    rating: 5,
+    text: "Best tire shop around. Honest pricing and quality work. I'll definitely be coming back.",
+    time: "2 weeks ago",
   },
 ];
 
@@ -97,27 +55,28 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({ reviews: sanityReviews }: { reviews?: { name: string; vehicle: string; rating: number; text: string; time: string }[] | null }) {
+  const reviewData = sanityReviews && sanityReviews.length > 0 ? sanityReviews : reviews;
   const [activeIndex, setActiveIndex] = useState(0);
-  const current = reviews[activeIndex];
+  const current = reviewData[activeIndex];
 
-  const handleNext = () => setActiveIndex((prev) => (prev + 1) % reviews.length);
-  const handlePrev = () => setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  const handleNext = () => setActiveIndex((prev) => (prev + 1) % reviewData.length);
+  const handlePrev = () => setActiveIndex((prev) => (prev - 1 + reviewData.length) % reviewData.length);
 
   return (
-    <section className="relative py-24 sm:py-32 bg-[#3B3B3B] overflow-hidden">
+    <section className="relative py-24 sm:py-32 bg-white overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="text-center mb-14">
           <Badge>Reviews</Badge>
-          <h2 className="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight">
+          <h2 className="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-gray-900">
             What Our Customers Say
           </h2>
           <div className="mt-4 w-16 h-[2px] bg-red mx-auto" />
         </ScrollReveal>
 
         {/* Container with background image */}
-        <div className="relative overflow-hidden p-4 sm:p-6 lg:p-8">
+        <div className="relative overflow-hidden p-4 sm:p-6 lg:p-8" style={{ clipPath: "polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px))" }}>
           {/* Background image — tire shop / truck vibes */}
           <Image
             src="/img/tyres.jpg"
@@ -138,7 +97,8 @@ export default function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.3 }}
-                className="w-full lg:w-[55%] bg-background/90 backdrop-blur-sm border border-white/[0.08] p-8 sm:p-10 lg:p-12 flex flex-col justify-between"
+                className="w-full lg:w-[55%] bg-white p-8 sm:p-10 lg:p-14 flex flex-col justify-between shadow-2xl"
+                style={{ clipPath: "polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px))" }}
               >
                   <div>
                     {/* Author + rating */}
@@ -150,30 +110,30 @@ export default function Testimonials() {
                           {current.name.charAt(0)}
                         </div>
                         <div>
-                          <p className="font-display text-sm font-bold uppercase tracking-wider text-white">{current.name}</p>
-                          <p className="font-body text-xs text-white/30 mt-0.5">{current.vehicle}</p>
+                          <p className="font-display text-base font-bold uppercase tracking-wider text-gray-900">{current.name}</p>
+                          <p className="font-body text-sm text-gray-400 mt-0.5">{current.vehicle}</p>
                         </div>
                       </div>
                       <Stars count={current.rating} />
                     </div>
 
                     {/* Quote */}
-                    <svg className="w-8 h-8 text-red/20 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-red/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
                     </svg>
-                    <p className="font-body text-base sm:text-lg text-white/60 leading-relaxed">
+                    <p className="font-body text-lg sm:text-xl text-gray-700 leading-relaxed">
                       &ldquo;{current.text}&rdquo;
                     </p>
 
-                    <p className="font-body text-xs text-white/20 mt-4">{current.time}</p>
+                    <p className="font-body text-sm text-gray-400 mt-4">{current.time}</p>
                   </div>
 
                   {/* Navigation + CTA */}
-                  <div className="flex items-center justify-between mt-10 pt-6 border-t border-white/[0.06]">
+                  <div className="flex items-center justify-between mt-10 pt-6 border-t border-gray-200">
                     <div className="flex gap-2">
                       <button
                         onClick={handlePrev}
-                        className="w-10 h-10 bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/40 hover:text-white transition-all"
+                        className="w-10 h-10 bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-all"
                         style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)" }}
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -182,7 +142,7 @@ export default function Testimonials() {
                       </button>
                       <button
                         onClick={handleNext}
-                        className="w-10 h-10 bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/40 hover:text-white transition-all"
+                        className="w-10 h-10 bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-all"
                         style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)" }}
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
