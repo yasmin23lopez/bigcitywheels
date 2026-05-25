@@ -93,13 +93,12 @@ const menuItems = [
     href: "/services/lift-kits",
     sections: [
       {
-        title: "By Make",
+        title: "By Size",
         links: [
-          { label: "Chevy / GMC", href: "/services/lift-kits" },
-          { label: "Ford", href: "/services/lift-kits" },
-          { label: "Dodge", href: "/services/lift-kits" },
-          { label: "Jeep", href: "/services/lift-kits" },
-          { label: "Nissan", href: "/services/lift-kits" },
+          { label: "1-2 Inch Lift Kits", href: "/services/lift-kits" },
+          { label: "3-5 Inch Lift Kits", href: "/services/lift-kits" },
+          { label: "6-8 Inch Lift Kits", href: "/services/lift-kits" },
+          { label: "Leveling Kits", href: "/services/lift-kits" },
         ],
       },
     ],

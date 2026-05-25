@@ -140,21 +140,22 @@ const navItems: NavItem[] = [
     href: "/services/lift-kits",
     megamenu: [
       {
-        title: "By Make",
+        title: "By Size",
         links: [
-          { label: "Chevy / GMC", href: "/services/lift-kits" },
-          { label: "Ford", href: "/services/lift-kits" },
-          { label: "Dodge", href: "/services/lift-kits" },
-          { label: "Jeep", href: "/services/lift-kits" },
-          { label: "Nissan", href: "/services/lift-kits" },
+          { label: "1-2 Inch Lift Kits", href: "/services/lift-kits" },
+          { label: "3-5 Inch Lift Kits", href: "/services/lift-kits" },
+          { label: "6-8 Inch Lift Kits", href: "/services/lift-kits" },
+          { label: "Leveling Kits", href: "/services/lift-kits" },
         ],
       },
       {
-        title: "By Type",
+        title: "Popular Brands",
         links: [
-          { label: "Lift Kits", href: "/services/lift-kits" },
-          { label: "Leveling Kits", href: "/services/lift-kits" },
-          { label: "Suspension Upgrades", href: "/services/lift-kits" },
+          { label: "ReadyLIFT", href: "/services/lift-kits" },
+          { label: "Rough Country", href: "/services/lift-kits" },
+          { label: "ICON", href: "/services/lift-kits" },
+          { label: "Mammoth", href: "/services/lift-kits" },
+          { label: "Cognito", href: "/services/lift-kits" },
         ],
       },
       {
