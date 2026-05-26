@@ -39,7 +39,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-export default function LiftKitsCatalog() {
+export default function LiftKitsCatalog({ hiddenProducts = [] }: { hiddenProducts?: any[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,9 +56,18 @@ export default function LiftKitsCatalog() {
         Object.keys(data).forEach((k) => {
           if (data[k].length > 0) clean[k] = data[k];
         });
+        // Filter hidden products
+        if (hiddenProducts.length > 0) {
+          Object.keys(clean).forEach(cat => {
+            clean[cat] = clean[cat].filter((p: any) => !hiddenProducts.some((h: any) =>
+              (h.partNumber && p.code === h.partNumber) ||
+              (h.name && p.name && p.name.toLowerCase().includes(h.name.toLowerCase()))
+            ));
+          });
+        }
         setCatalog(clean);
       });
-  }, []);
+  }, [hiddenProducts]);
 
   const categories = Object.keys(catalog);
 

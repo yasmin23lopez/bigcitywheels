@@ -1,8 +1,13 @@
 import Badge from "@/components/Badge";
 import BrandsSlider from "@/components/BrandsSlider";
 import LiftKitsCatalog from "@/components/LiftKitsCatalog";
+import { getHiddenProducts } from "@/sanity/queries";
 
-export default function LiftKitsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function LiftKitsPage() {
+  const hidden = await getHiddenProducts().catch(() => []);
+
   return (
     <>
       <section className="pt-52 pb-20 sm:pt-60 sm:pb-28 bg-[#e8e8e8]">
@@ -18,7 +23,7 @@ export default function LiftKitsPage() {
             <div className="mt-4 w-16 h-[2px] bg-red mx-auto" />
           </div>
 
-          <LiftKitsCatalog />
+          <LiftKitsCatalog hiddenProducts={hidden} />
         </div>
       </section>
 
