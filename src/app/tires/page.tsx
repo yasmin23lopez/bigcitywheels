@@ -4,6 +4,8 @@ import BrandsSlider from "@/components/BrandsSlider";
 import TiresCatalog from "@/components/TiresCatalog";
 import { getHiddenProducts, getCustomProducts } from "@/sanity/queries";
 
+export const revalidate = 30;
+
 export default async function TiresPage() {
   const [hidden, customProducts] = await Promise.all([
     getHiddenProducts().catch(() => []),

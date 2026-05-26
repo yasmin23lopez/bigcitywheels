@@ -67,7 +67,7 @@ export default function Contact({ settings }: { settings?: any }) {
                 href={item.action.href}
                 target={item.action.href.startsWith("http") ? "_blank" : undefined}
                 rel={item.action.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group bg-white/[0.03] border border-white/[0.06] hover:border-red/30 p-6 sm:p-8 transition-all duration-300 hover:bg-white/[0.05] flex flex-col items-center text-center"
+                className="group bg-white/[0.06] border border-white/[0.1] hover:border-red/30 p-6 sm:p-8 transition-all duration-300 hover:bg-white/[0.1] flex flex-col items-center text-center"
                 style={{
                   clipPath: i === 0
                     ? "polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)"

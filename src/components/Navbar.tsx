@@ -252,7 +252,7 @@ export default function Navbar() {
           }}
         >
           <div className="flex animate-marquee whitespace-nowrap py-1.5 sm:py-2">
-            {[...Array(4)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <span key={i} className="font-condensed text-[11px] sm:text-[13px] tracking-[0.05em] sm:tracking-[0.1em] uppercase font-semibold text-white/80 mx-6 sm:mx-8">
                 Grand Opening — Free Alignment with every rim or suspension purchase
               </span>
