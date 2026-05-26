@@ -45,7 +45,7 @@ interface CustomProduct {
   imageUrl?: string;
 }
 
-export default function WheelsCatalog({ hiddenProducts = [], customProducts = [] }: { hiddenProducts?: string[]; customProducts?: CustomProduct[] }) {
+export default function WheelsCatalog({ hiddenProducts = [], customProducts = [] }: { hiddenProducts?: any[]; customProducts?: CustomProduct[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,7 +67,7 @@ export default function WheelsCatalog({ hiddenProducts = [], customProducts = []
         // Filter out hidden products
         if (hiddenProducts.length > 0) {
           Object.keys(data).forEach(brand => {
-            data[brand] = data[brand].filter(p => !hiddenProducts.includes(p.part));
+            data[brand] = data[brand].filter(p => !hiddenProducts.some((h) => (h.partNumber && p.part === h.partNumber) || (h.name && p.desc && p.desc.toLowerCase().includes(h.name.toLowerCase()))));
           });
         }
         // Merge custom products from Sanity

@@ -6,11 +6,22 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "partNumbers",
-      title: "Hidden Part Numbers",
-      description: "Add part numbers of products you want to hide from the catalog. One per line.",
+      name: "products",
+      title: "Products to Hide",
+      description: "Add products you want to remove from the catalog. You can search by name or part number.",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "name", title: "Product Name (or part of it)", type: "string" }),
+            defineField({ name: "partNumber", title: "Part Number (optional)", type: "string" }),
+          ],
+          preview: {
+            select: { title: "name", subtitle: "partNumber" },
+          },
+        },
+      ],
     }),
   ],
   preview: {

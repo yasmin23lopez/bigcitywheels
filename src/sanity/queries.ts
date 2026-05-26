@@ -89,7 +89,7 @@ export async function getProductsGrouped(category: string) {
 
 // Hidden products list
 export async function getHiddenProducts() {
-  const result = await client.fetch(`*[_type == "hiddenProducts"][0].partNumbers`);
+  const result = await client.fetch(`*[_type == "hiddenProducts"][0].products[]{name, partNumber}`);
   return result || [];
 }
 
