@@ -5,6 +5,7 @@ import WheelsCatalog from "@/components/WheelsCatalog";
 import { getHiddenProducts, getCustomProducts } from "@/sanity/queries";
 
 export const revalidate = 30; // Revalidate every 30 seconds
+export const dynamic = "force-dynamic";
 
 export default async function WheelsPage() {
   const [hidden, customProducts] = await Promise.all([
