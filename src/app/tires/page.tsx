@@ -2,14 +2,15 @@ import { Suspense } from "react";
 import Badge from "@/components/Badge";
 import BrandsSlider from "@/components/BrandsSlider";
 import TiresCatalog from "@/components/TiresCatalog";
-import { getHiddenProducts, getCustomProducts } from "@/sanity/queries";
+import { getHiddenProducts, getHiddenBrands, getCustomProducts } from "@/sanity/queries";
 
 export const revalidate = 30;
 export const dynamic = "force-dynamic";
 
 export default async function TiresPage() {
-  const [hidden, customProducts] = await Promise.all([
+  const [hidden, hiddenBrands, customProducts] = await Promise.all([
     getHiddenProducts().catch(() => []),
+    getHiddenBrands().catch(() => []),
     getCustomProducts("tires").catch(() => []),
   ]);
 
@@ -28,7 +29,7 @@ export default async function TiresPage() {
             <div className="mt-4 w-16 h-[2px] bg-red mx-auto" />
           </div>
           <Suspense fallback={null}>
-            <TiresCatalog hiddenProducts={hidden} customProducts={customProducts} />
+            <TiresCatalog hiddenProducts={hidden} hiddenBrands={hiddenBrands} customProducts={customProducts} />
           </Suspense>
         </div>
       </section>

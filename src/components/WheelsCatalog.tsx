@@ -45,7 +45,7 @@ interface CustomProduct {
   imageUrl?: string;
 }
 
-export default function WheelsCatalog({ hiddenProducts = [], customProducts = [] }: { hiddenProducts?: any[]; customProducts?: CustomProduct[] }) {
+export default function WheelsCatalog({ hiddenProducts = [], hiddenBrands = [], customProducts = [] }: { hiddenProducts?: any[]; hiddenBrands?: string[]; customProducts?: CustomProduct[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -64,6 +64,14 @@ export default function WheelsCatalog({ hiddenProducts = [], customProducts = []
     fetch("/data/wheels-catalog.json")
       .then((r) => r.json())
       .then((data: Catalog) => {
+        // Filter out entire hidden brands (partial, case-insensitive match on the brand key)
+        if (hiddenBrands.length > 0) {
+          Object.keys(data).forEach(brand => {
+            if (hiddenBrands.some((hb) => hb && brand.toLowerCase().includes(hb.toLowerCase()))) {
+              delete data[brand];
+            }
+          });
+        }
         // Filter out hidden products
         if (hiddenProducts.length > 0) {
           Object.keys(data).forEach(brand => {
@@ -87,7 +95,7 @@ export default function WheelsCatalog({ hiddenProducts = [], customProducts = []
           if (match) setActiveBrand(match);
         }
       });
-  }, [searchParams, hiddenProducts, customProducts]);
+  }, [searchParams, hiddenProducts, hiddenBrands, customProducts]);
 
   const brands = Object.keys(catalog);
 

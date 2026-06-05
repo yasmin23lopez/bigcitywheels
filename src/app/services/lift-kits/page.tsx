@@ -1,12 +1,15 @@
 import Badge from "@/components/Badge";
 import BrandsSlider from "@/components/BrandsSlider";
 import LiftKitsCatalog from "@/components/LiftKitsCatalog";
-import { getHiddenProducts } from "@/sanity/queries";
+import { getHiddenProducts, getHiddenBrands } from "@/sanity/queries";
 
 export const dynamic = "force-dynamic";
 
 export default async function LiftKitsPage() {
-  const hidden = await getHiddenProducts().catch(() => []);
+  const [hidden, hiddenBrands] = await Promise.all([
+    getHiddenProducts().catch(() => []),
+    getHiddenBrands().catch(() => []),
+  ]);
 
   return (
     <>
@@ -23,7 +26,7 @@ export default async function LiftKitsPage() {
             <div className="mt-4 w-16 h-[2px] bg-red mx-auto" />
           </div>
 
-          <LiftKitsCatalog hiddenProducts={hidden} />
+          <LiftKitsCatalog hiddenProducts={hidden} hiddenBrands={hiddenBrands} />
         </div>
       </section>
 

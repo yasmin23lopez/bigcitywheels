@@ -39,7 +39,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-export default function LiftKitsCatalog({ hiddenProducts = [] }: { hiddenProducts?: any[] }) {
+export default function LiftKitsCatalog({ hiddenProducts = [], hiddenBrands = [] }: { hiddenProducts?: any[]; hiddenBrands?: string[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,9 +65,19 @@ export default function LiftKitsCatalog({ hiddenProducts = [] }: { hiddenProduct
             ));
           });
         }
+        // Filter hidden brands (match against each product's brand)
+        if (hiddenBrands.length > 0) {
+          Object.keys(clean).forEach(cat => {
+            clean[cat] = clean[cat].filter((p: any) =>
+              !hiddenBrands.some((hb) => hb && p.brand && p.brand.toLowerCase().includes(hb.toLowerCase()))
+            );
+          });
+          // Drop now-empty categories
+          Object.keys(clean).forEach(cat => { if (clean[cat].length === 0) delete clean[cat]; });
+        }
         setCatalog(clean);
       });
-  }, [hiddenProducts]);
+  }, [hiddenProducts, hiddenBrands]);
 
   const categories = Object.keys(catalog);
 

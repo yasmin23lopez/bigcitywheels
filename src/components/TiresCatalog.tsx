@@ -37,7 +37,7 @@ function parseTireType(desc: string): string | null {
 
 const ITEMS_PER_PAGE = 20;
 
-export default function TiresCatalog({ hiddenProducts = [], customProducts = [] }: { hiddenProducts?: any[]; customProducts?: any[] }) {
+export default function TiresCatalog({ hiddenProducts = [], hiddenBrands = [], customProducts = [] }: { hiddenProducts?: any[]; hiddenBrands?: string[]; customProducts?: any[] }) {
   const [catalog, setCatalog] = useState<Catalog>({});
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,6 +55,13 @@ export default function TiresCatalog({ hiddenProducts = [], customProducts = [] 
     fetch("/data/tires-catalog.json")
       .then((r) => r.json())
       .then((data: Catalog) => {
+        if (hiddenBrands.length > 0) {
+          Object.keys(data).forEach(brand => {
+            if (hiddenBrands.some((hb) => hb && brand.toLowerCase().includes(hb.toLowerCase()))) {
+              delete data[brand];
+            }
+          });
+        }
         if (hiddenProducts.length > 0) {
           Object.keys(data).forEach(brand => {
             data[brand] = data[brand].filter(p => !hiddenProducts.some((h) => (h.partNumber && p.part === h.partNumber) || (h.name && p.desc && p.desc.toLowerCase().includes(h.name.toLowerCase()))));
@@ -76,7 +83,7 @@ export default function TiresCatalog({ hiddenProducts = [], customProducts = [] 
           if (match) setActiveBrand(match);
         }
       });
-  }, [searchParams, hiddenProducts, customProducts]);
+  }, [searchParams, hiddenProducts, hiddenBrands, customProducts]);
 
   const brands = Object.keys(catalog);
 

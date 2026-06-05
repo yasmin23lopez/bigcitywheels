@@ -71,19 +71,19 @@ export default function StairTransition() {
   });
 
   return (
-    <div ref={ref} className="relative h-[70vh] overflow-hidden bg-white">
+    <div ref={ref} className="relative h-[80vh] md:h-[70vh] overflow-hidden bg-white">
       {/* Badge floating on top */}
       <div className="absolute top-16 left-1/2 -translate-x-1/2 z-20">
         <Badge color="red">Our Products</Badge>
       </div>
 
       {/* Cards */}
-      <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4">
+      <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1">
         {categories.map((cat, i) => (
           <a
             href={cat.href}
             key={i}
-            className="relative group cursor-pointer bg-white border-r border-black/[0.06] last:border-r-0 flex flex-col items-center justify-center overflow-hidden"
+            className="relative group cursor-pointer bg-white border-r border-b border-black/[0.06] md:border-b-0 md:last:border-r-0 flex flex-col items-center justify-center overflow-hidden"
           >
             {/* Hover image with dark overlay */}
             <Image
@@ -108,8 +108,8 @@ export default function StairTransition() {
         ))}
       </div>
 
-      {/* Stair bars */}
-      <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4 pointer-events-none" style={{ zIndex: 10 }}>
+      {/* Stair bars - desktop only (the staggered reveal assumes a 4-col row) */}
+      <div className="absolute inset-0 hidden md:grid grid-cols-4 pointer-events-none" style={{ zIndex: 10 }}>
         <StairBar scrollYProgress={scrollYProgress} index={0} />
         <StairBar scrollYProgress={scrollYProgress} index={1} />
         <StairBar scrollYProgress={scrollYProgress} index={2} />

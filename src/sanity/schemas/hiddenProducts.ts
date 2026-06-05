@@ -23,6 +23,14 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: "hiddenBrands",
+      title: "Brands to Hide (entire brand)",
+      description: "Type a brand name to hide ALL of its products from the catalog (e.g. \"Lexani\", \"Goodyear\"). The name just needs to partially match the brand — no need for exact spelling.",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+    }),
   ],
   preview: {
     prepare() {

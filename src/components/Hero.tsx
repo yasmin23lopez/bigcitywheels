@@ -191,7 +191,7 @@ export default function Hero({ promos }: { promos?: any[] | null }) {
       ref={sectionRef}
       className="relative h-[100vh] bg-[#2142A1]"
     >
-      <div className="h-screen flex flex-col items-center justify-center">
+      <div className="h-screen flex flex-col items-center justify-center py-24 md:py-16">
         {/* 3D Wheel - Behind everything */}
         <div className="absolute inset-0 z-0">
           <Canvas camera={{ position: [0, 0.3, 4], fov: 45 }}>
@@ -206,29 +206,29 @@ export default function Hero({ promos }: { promos?: any[] | null }) {
           {/* Promo Banner - appears after animation */}
           <motion.div
             style={{ opacity: ctaOpacity }}
-            className="mb-6"
+            className="mb-3 sm:mb-6"
           >
-            <span className="font-condensed text-[36px] font-bold tracking-[0.25em] uppercase text-white">
+            <span className="font-condensed text-[clamp(0.85rem,3.2vw,2.25rem)] font-bold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white">
               Quality tires for every budget
             </span>
           </motion.div>
 
           {/* Headline - "Big wheels start in a big city." */}
           <motion.div style={{ opacity: line1Opacity, y: line1Y }}>
-            <span className="block font-display text-[clamp(2.8rem,10vw,8rem)] uppercase leading-[0.9] tracking-[-0.03em] text-white">
+            <span className="block font-display text-[clamp(2.4rem,min(10vw,13vh),8rem)] uppercase leading-[0.9] tracking-[-0.03em] text-white">
               <span className="font-black">Big </span>
               <span className="italic text-red" style={{ fontFamily: "var(--font-accent)" }}>wheels</span>
             </span>
           </motion.div>
 
           <motion.div style={{ opacity: line2Opacity, y: line2Y }}>
-            <span className="block font-display text-[clamp(1.8rem,5vw,4rem)] font-bold uppercase leading-[1.1] tracking-[0.02em] text-white/80 mt-2">
+            <span className="block font-display text-[clamp(1.5rem,min(5vw,6vh),4rem)] font-bold uppercase leading-[1.1] tracking-[0.02em] text-white/80 mt-1 sm:mt-2">
               start in a
             </span>
           </motion.div>
 
           <motion.div style={{ opacity: line3Opacity, y: line3Y }}>
-            <span className="block font-display text-[clamp(3rem,11vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.03em] text-white">
+            <span className="block font-display text-[clamp(2.6rem,min(11vw,15vh),9rem)] font-black uppercase leading-[0.85] tracking-[-0.03em] text-white">
               big city.
             </span>
           </motion.div>
@@ -236,7 +236,7 @@ export default function Hero({ promos }: { promos?: any[] | null }) {
           {/* CTA */}
           <motion.div
             style={{ opacity: ctaOpacity }}
-            className="mt-8"
+            className="mt-6 sm:mt-8"
           >
             <a
               href="/wheels"

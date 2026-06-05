@@ -72,14 +72,14 @@ export default function Services() {
   const columns = [y1, y2, y3, y4];
 
   return (
-    <section id="services" ref={ref} className="relative h-[70vh] overflow-hidden bg-background">
+    <section id="services" ref={ref} className="relative h-[80vh] md:h-[70vh] overflow-hidden bg-background">
       {/* Cards layer */}
-      <div className="absolute inset-0 grid grid-cols-4">
+      <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1">
         {services.map((service, i) => (
           <a
             href={service.href}
             key={i}
-            className="relative group cursor-pointer bg-background border-r border-white/[0.06] last:border-r-0 flex flex-col items-center justify-center overflow-hidden"
+            className="relative group cursor-pointer bg-background border-r border-b border-white/[0.06] md:border-b-0 md:last:border-r-0 flex flex-col items-center justify-center overflow-hidden"
           >
             {/* Hover image with dark overlay */}
             <Image
@@ -93,16 +93,16 @@ export default function Services() {
 
             <div className="relative z-10 flex flex-col items-center justify-center">
               {/* Icon */}
-              <div className="text-white/20 group-hover:text-red transition-all duration-300 mb-5 group-hover:scale-110">
+              <div className="text-white/40 md:text-white/20 group-hover:text-red transition-all duration-300 mb-3 sm:mb-5 group-hover:scale-110 [&>svg]:w-10 [&>svg]:h-10 sm:[&>svg]:w-14 sm:[&>svg]:h-14">
                 {service.icon}
               </div>
 
               {/* Text */}
-              <div className="text-center px-4">
-                <p className="font-display text-lg sm:text-xl font-bold text-white uppercase tracking-wide mb-2">
+              <div className="text-center px-2 sm:px-4">
+                <p className="font-display text-sm sm:text-xl font-bold text-white uppercase tracking-wide mb-1 sm:mb-2">
                   {service.title}
                 </p>
-                <p className="font-body text-xs sm:text-sm text-white/40 group-hover:text-white/60 max-w-[180px] transition-colors duration-300">
+                <p className="font-body text-[11px] leading-snug sm:text-sm text-white/50 group-hover:text-white/60 max-w-[180px] transition-colors duration-300">
                   {service.description}
                 </p>
               </div>
@@ -116,8 +116,8 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Stair columns */}
-      <div className="absolute inset-0 grid grid-cols-4 pointer-events-none">
+      {/* Stair columns - desktop only (the staggered reveal assumes a 4-col row) */}
+      <div className="absolute inset-0 hidden md:grid grid-cols-4 pointer-events-none">
         {columns.map((y, i) => (
           <motion.div key={i} style={{ y }} className="bg-white" />
         ))}

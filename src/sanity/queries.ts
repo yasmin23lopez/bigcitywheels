@@ -93,6 +93,12 @@ export async function getHiddenProducts() {
   return result || [];
 }
 
+// Hidden brands list (hide an entire brand from the catalog)
+export async function getHiddenBrands() {
+  const result = await client.fetch(`*[_type == "hiddenProducts"][0].hiddenBrands`);
+  return (result as string[] | null) || [];
+}
+
 // Custom products added via Sanity (to merge with JSON catalog)
 export async function getCustomProducts(category: string) {
   return client.fetch(`*[_type == "product" && category == $category && inStock == true]{
